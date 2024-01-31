@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Home"
+        android:fontFamily="@font/poppins_bold"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/Feed"
+        android:fontFamily="@font/poppins_bold"
+        android:icon="@drawable/baseline_dynamic_feed_24"
+        android:title="Feed" />
+
+    <item
+        android:id="@+id/Profile"
+        android:fontFamily="@font/poppins_bold"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile" />
+
+</menu>
