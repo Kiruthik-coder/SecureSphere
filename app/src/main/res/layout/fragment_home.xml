@@ -174,9 +174,9 @@
             android:id="@+id/textView11"
             android:layout_width="81dp"
             android:layout_height="62dp"
+
             android:fontFamily="@font/poppins_light"
             android:text="Activity Manager"
-
             android:textAlignment="center"
             android:textColor="#040404"
             android:textSize="14sp"
@@ -266,8 +266,8 @@
 
         <ImageButton
             android:id="@+id/xssBT"
-            android:layout_width="83dp"
-            android:layout_height="79dp"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
             android:background="@drawable/button_backgroud"
             android:backgroundTint="#FFFFFF"
             android:elevation="1dp"
@@ -282,33 +282,33 @@
 
         <ImageButton
             android:id="@+id/web_bt"
-            android:layout_width="83dp"
-            android:layout_height="79dp"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
             android:background="@drawable/button_backgroud"
             android:backgroundTint="#FFFFFF"
             android:elevation="1dp"
-            android:src="@drawable/spider"
             android:foreground="?android:attr/selectableItemBackground"
+            android:src="@drawable/spider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.472"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintStart_toEndOf="@+id/xssBT"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.086" />
+            app:layout_constraintVertical_bias="0.081" />
 
         <ImageButton
             android:id="@+id/activity_bt"
-            android:layout_width="83dp"
-            android:layout_height="79dp"
+            android:layout_width="80dp"
+            android:layout_height="75dp"
             android:background="@drawable/button_backgroud"
             android:backgroundTint="#FFFFFF"
             android:elevation="1dp"
-            android:src="@drawable/history"
             android:foreground="?android:attr/selectableItemBackground"
+            android:src="@drawable/history"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.893"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.615"
+            app:layout_constraintStart_toEndOf="@+id/web_bt"
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:layout_constraintVertical_bias="0.086" />
 
