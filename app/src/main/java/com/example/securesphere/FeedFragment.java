@@ -5,11 +5,24 @@ package com.example.securesphere;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +30,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FeedFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    LogCylerAdapter myAdapter;
+    ArrayList<logItem> list;
+
+    LottieAnimationView loadAni;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +83,43 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        View root = inflater.inflate(R.layout.fragment_feed, container, false);
+
+        loadAni = root.findViewById(R.id.loadani);
+
+
+        recyclerView = root.findViewById(R.id.log_cycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new SpacingItemDecoration(18));
+
+        //FirebaseApp.initializeApp(getContext());
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        String ref = "FeedData";
+
+        databaseReference = firebaseDatabase.getReference(ref);
+
+        list = new ArrayList<>();
+        myAdapter = new LogCylerAdapter(getActivity(), list);
+        recyclerView.setAdapter(myAdapter);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren() ) {
+                    logItem logitem = dataSnapshot.getValue(logItem.class);
+                    list.add(logitem);
+                }
+                myAdapter.notifyDataSetChanged();
+                loadAni.setVisibility(View.GONE);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return root;
     }
 }

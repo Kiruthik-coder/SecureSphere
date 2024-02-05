@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_home, container, false);
-        animationView = root.findViewById(R.id.safe_tick);
+        animationView = root.findViewById(R.id.feedClearAni);
         web_bt = root.findViewById(R.id.web_bt);
         activity_bt = root.findViewById(R.id.activity_bt);
         menu_bt = root.findViewById(R.id.menu_bt);

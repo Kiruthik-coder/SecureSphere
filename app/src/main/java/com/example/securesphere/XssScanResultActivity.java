@@ -20,7 +20,7 @@ public class XssScanResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xss_scan_result);
 
-        animationView = findViewById(R.id.safe_tick);
+        animationView = findViewById(R.id.feedClearAni);
         ok_bt = findViewById(R.id.p1b7);
 
         ok_bt.setVisibility(View.GONE);

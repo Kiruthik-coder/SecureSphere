@@ -25,7 +25,7 @@ public class XssActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_xss);
         history_txt = findViewById(R.id.textView16);
-        scan_bt = findViewById(R.id.p1b2);
+        scan_bt = findViewById(R.id.infoBt);
         exit_bt = findViewById(R.id.exit_xss);
         exit_bt.setOnClickListener(new View.OnClickListener() {
             @Override

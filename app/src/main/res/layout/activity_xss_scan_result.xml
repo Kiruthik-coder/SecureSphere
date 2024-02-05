@@ -37,11 +37,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/safe_tick"
+        app:layout_constraintTop_toBottomOf="@+id/feedClearAni"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/safe_tick"
+        android:id="@+id/feedClearAni"
         android:layout_width="277dp"
         android:layout_height="266dp"
 

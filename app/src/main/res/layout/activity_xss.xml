@@ -230,7 +230,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/p1b2"
+                android:id="@+id/infoBt"
                 android:layout_width="186dp"
                 android:layout_height="51dp"
                 android:background="@drawable/button_backgroud"

@@ -7,7 +7,7 @@
     tools:context=".Welcome_Activity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/safe_tick"
+        android:id="@+id/feedClearAni"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
