@@ -7,22 +7,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import com.example.securesphere.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
 
     ActivityHomeBinding binding;
-
-
+    ImageButton menu_bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        menu_bt = findViewById(R.id.menu_bt);
+        menu_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this, MenuActivity.class);
+                startActivity(i);
+            }
+        });
 
         try {
             replaceFragment(new HomeFragment());

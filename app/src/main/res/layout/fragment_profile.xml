@@ -12,8 +12,8 @@
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="269dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:elevation="2dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="Kiruthik Suriyah M"
@@ -28,8 +28,8 @@
 
         <TextView
             android:id="@+id/textView13"
-            android:layout_width="269dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:elevation="2dp"
             android:fontFamily="@font/poppins_light"
             android:text="+918220317689"
@@ -45,8 +45,7 @@
         <Button
             android:id="@+id/p1b3"
             android:layout_width="186dp"
-            android:layout_height="51dp"
-            android:layout_marginBottom="396dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/button_backgroud"
             android:backgroundTint="#FFFFFF"
             android:fontFamily="@font/poppins_semibold"
@@ -59,7 +58,7 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.023" />
 
         <Button
             android:id="@+id/p1b4"
@@ -149,68 +148,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_bias="0.038" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.02">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="68dp">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="72dp"
-                    android:layout_height="48dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.05"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/logo" />
-
-                <ImageButton
-                    android:id="@+id/menu_bt"
-                    android:layout_width="58dp"
-                    android:layout_height="51dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:src="@drawable/baseline_menu_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.951"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.588" />
-
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="58dp"
-                    android:layout_height="51dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:src="@drawable/baseline_search_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/menu_bt"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.588" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintVertical_bias="0.027" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

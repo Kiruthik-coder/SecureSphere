@@ -3,6 +3,10 @@ package com.example.securesphere;
 /* App By Kiruthik Suriyah M
    Date Written: 29-Jan-2024 */
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.FirebaseApp;
@@ -36,6 +42,8 @@ public class FeedFragment extends Fragment {
     DatabaseReference databaseReference;
     LogCylerAdapter myAdapter;
     ArrayList<logItem> list;
+
+    ImageButton menu_bt;
 
     LottieAnimationView loadAni;
 
@@ -86,12 +94,30 @@ public class FeedFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_feed, container, false);
 
         loadAni = root.findViewById(R.id.loadani);
+        boolean Connection = haveNetworkConnection();
 
+        /*menu_bt = root.findViewById(R.id.menu_bt);
+        menu_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MenuActivity.class);
+                startActivity(i);
+            }
+        });*/
 
         recyclerView = root.findViewById(R.id.log_cycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new SpacingItemDecoration(18));
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!Connection){
+                    replaceFragment(new NoInternetFragment());
+                }
+            }
+        }, 500);
 
         //FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -121,5 +147,35 @@ public class FeedFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null)
+                .setCustomAnimations(
+                        R.anim.fadein,
+                        R.anim.fadeout
+                )
+                .replace(R.id.Frg_1, fragment)
+                .addToBackStack(null)
+                .commit();
+
     }
 }

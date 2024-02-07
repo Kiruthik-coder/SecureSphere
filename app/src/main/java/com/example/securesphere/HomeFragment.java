@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
         animationView = root.findViewById(R.id.feedClearAni);
         web_bt = root.findViewById(R.id.web_bt);
         activity_bt = root.findViewById(R.id.activity_bt);
-        menu_bt = root.findViewById(R.id.menu_bt);
+        //menu_bt = root.findViewById(R.id.menu_bt);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -109,13 +109,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        menu_bt.setOnClickListener(new View.OnClickListener() {
+        /*menu_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), MenuActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         return root;
     }

@@ -22,8 +22,7 @@ public class MenuActivity extends AppCompatActivity {
         exit_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MenuActivity.this, HomeActivity.class);
-                startActivity(i);
+                finish();
             }
         });
     }
