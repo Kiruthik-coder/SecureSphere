@@ -22,6 +22,7 @@ public class Welcome_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Welcome_Activity.this, HomeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

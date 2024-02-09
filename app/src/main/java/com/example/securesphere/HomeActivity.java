@@ -17,7 +17,7 @@ import com.example.securesphere.databinding.ActivityHomeBinding;
 public class HomeActivity extends AppCompatActivity {
 
     ActivityHomeBinding binding;
-    ImageButton menu_bt;
+    ImageButton menu_bt, search_bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        search_bt = findViewById(R.id.serach_button);
+        search_bt.setVisibility(View.GONE);
 
         try {
             replaceFragment(new HomeFragment());
@@ -61,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 )
                 .replace(R.id.Frg_1, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 }

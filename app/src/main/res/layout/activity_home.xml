@@ -50,7 +50,7 @@
                 app:layout_constraintVertical_bias="0.588" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/serach_button"
                 android:layout_width="58dp"
                 android:layout_height="51dp"
                 android:backgroundTint="#FFFFFF"
@@ -89,8 +89,8 @@
         android:elevation="18dp"
         android:fontFamily="@font/poppins_semibold"
         app:backgroundTint="#FFFFFF"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

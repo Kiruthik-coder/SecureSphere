@@ -28,11 +28,9 @@
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="Activity Manager
-"
-
+                android:text="Activity Manager"
                 android:textAlignment="center"
                 android:textColor="#040404"
                 android:textSize="20sp"

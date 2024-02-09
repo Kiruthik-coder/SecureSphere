@@ -1,14 +1,23 @@
 package com.example.securesphere;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.net.ConnectivityManager;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.airbnb.lottie.LottieAnimationView;
+
+import java.sql.Connection;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +27,10 @@ import android.widget.ImageButton;
 public class NoInternetFragment extends Fragment {
 
     ImageButton retry;
+
+    LottieAnimationView load_ani, no_net_ani;
+
+    TextView txt;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,13 +78,40 @@ public class NoInternetFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_no_internet, container, false);
         retry = root.findViewById(R.id.retry_bt);
+        txt = root.findViewById(R.id.no_net_txt);
+        no_net_ani = root.findViewById(R.id.no_net_ani);
+        load_ani = root.findViewById(R.id.loadani2);
+        load_ani.setVisibility(View.GONE);
+        boolean Connection = haveNetworkConnection();
 
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new FeedFragment());
+                txt.setVisibility(View.GONE);
+                no_net_ani.setVisibility(View.GONE);
+                retry.setVisibility(View.GONE);
+                load_ani.setVisibility(View.VISIBLE);
+                boolean Connection = haveNetworkConnection();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!Connection){
+                            txt.setVisibility(View.VISIBLE);
+                            no_net_ani.setVisibility(View.VISIBLE);
+                            retry.setVisibility(View.VISIBLE);
+                            load_ani.setVisibility(View.GONE);
+                        }else {
+                            //replaceFragment(new FeedFragment());
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        }
+
+                    }
+                }, 3000);
             }
         });
+
+
+
         return root;
     }
 
@@ -83,8 +123,28 @@ public class NoInternetFragment extends Fragment {
                         R.anim.fadeout
                 )
                 .replace(R.id.Frg_1, fragment)
-                .addToBackStack(null)
                 .commit();
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    public void onBackPressed() {
+        int fragments = getActivity().getSupportFragmentManager().getBackStackEntryCount();
 
     }
 }

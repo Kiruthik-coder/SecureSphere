@@ -2,7 +2,7 @@ package com.example.securesphere;
 
 public class logItem {
 
-    String headId, rating, date, info, link;
+    String headId, rating, date, info, link, provider;
 
     public String getHeadId() {
         return headId;
@@ -20,6 +20,9 @@ public class logItem {
         return info;
     }
 
+    public String getProvider() {
+        return provider;
+    }
 
     public String getLink() {
         return link;

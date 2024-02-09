@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LogCylerAdapter extends RecyclerView.Adapter<LogCylerAdapter.MyViewHolder>{
 
@@ -46,6 +47,18 @@ public class LogCylerAdapter extends RecyclerView.Adapter<LogCylerAdapter.MyView
 
         holder.date.setText(logItem.date);
         String temp4 = logItem.info;
+
+        String org = logItem.provider;
+
+        if (Objects.equals(org, "certin")){
+            holder.imageView.setImageResource(R.drawable.certlogo);
+        }
+
+        if (Objects.equals(org, "nist")){
+            holder.imageView.getLayoutParams().height = 50;
+            holder.imageView.getLayoutParams().width = 259;
+            holder.imageView.setImageResource(R.drawable.nistlogo);
+        }
 
         String Link = logItem.link;
 
@@ -81,7 +94,7 @@ public class LogCylerAdapter extends RecyclerView.Adapter<LogCylerAdapter.MyView
             rating = itemView.findViewById(R.id.rating);
             info = itemView.findViewById(R.id.infoView);
             date = itemView.findViewById(R.id.date);
-
+            imageView = itemView.findViewById(R.id.provider_img);
             button = itemView.findViewById(R.id.infoBt);
 
         }

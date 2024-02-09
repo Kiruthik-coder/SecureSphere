@@ -11,8 +11,25 @@
         android:layout_height="match_parent">
 
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadani2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.7"
+
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.7"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/appleloadingani" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/no_net_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
@@ -24,11 +41,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feedClearAni2"
+            app:layout_constraintTop_toBottomOf="@+id/no_net_ani"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/feedClearAni2"
+            android:id="@+id/no_net_ani"
             android:layout_width="79dp"
             android:layout_height="61dp"
 
@@ -55,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/no_net_txt"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
