@@ -2,7 +2,10 @@ package com.example.securesphere;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -17,7 +20,7 @@ public class XssActivity extends AppCompatActivity {
     ImageButton exit_bt;
 
     Button scan_bt;
-    TextView history_txt;
+    TextView history_txt, URL_txt;
     LottieAnimationView animationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class XssActivity extends AppCompatActivity {
         history_txt = findViewById(R.id.textView16);
         scan_bt = findViewById(R.id.infoBt);
         exit_bt = findViewById(R.id.exit_xss);
+        URL_txt = findViewById(R.id.UrlTextView);
         exit_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,14 +49,42 @@ public class XssActivity extends AppCompatActivity {
             }
         }, 5000);
 
-
         scan_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(XssActivity.this, XssScanningActivity.class);
-                startActivity(i);
+                String temp = URL_txt.getText().toString();
+                if (!temp.isEmpty()){
+                    boolean Connection = haveNetworkConnection();
+                    if (!Connection){
+                        Intent i = new Intent(XssActivity.this, NoInternetActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Intent i = new Intent(XssActivity.this, XssScanningActivity.class);
+                        i.putExtra("URL", temp);
+                        startActivity(i);
+                    }
+                } else {
+                    URL_txt.setHint("Please Paste URL !");
+                }
             }
         });
 
+    }
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 }

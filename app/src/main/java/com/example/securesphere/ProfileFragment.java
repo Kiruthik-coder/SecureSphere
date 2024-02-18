@@ -1,5 +1,8 @@
 package com.example.securesphere;
 
+/* App By Kiruthik Suriyah M
+   last updated: 30-jan-2024 */
+
 import android.content.Intent;
 import android.os.Bundle;
 

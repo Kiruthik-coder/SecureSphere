@@ -1,5 +1,8 @@
 package com.example.securesphere;
 
+/* App By Kiruthik Suriyah M
+   Date Written: 29-Jan-2024 */
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

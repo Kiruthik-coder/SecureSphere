@@ -1,5 +1,8 @@
 package com.example.securesphere;
 
+/* App By Kiruthik Suriyah M
+   Last update: 30-Jan-2024 */
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

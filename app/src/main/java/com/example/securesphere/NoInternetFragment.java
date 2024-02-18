@@ -1,5 +1,8 @@
 package com.example.securesphere;
 
+/* App By Kiruthik Suriyah M
+   last updated: 18-Feb-2024 */
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;

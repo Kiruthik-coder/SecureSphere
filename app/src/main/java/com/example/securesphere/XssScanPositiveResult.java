@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-public class XssScanResultActivity extends AppCompatActivity {
+public class XssScanPositiveResult extends AppCompatActivity {
 
     LottieAnimationView animationView;
     Button ok_bt;
@@ -18,12 +18,12 @@ public class XssScanResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xss_scan_result);
+        setContentView(R.layout.activity_xss_scan_positive_result);
 
         animationView = findViewById(R.id.feedClearAni);
         ok_bt = findViewById(R.id.p1b7);
-
         ok_bt.setVisibility(View.GONE);
+
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -37,7 +37,7 @@ public class XssScanResultActivity extends AppCompatActivity {
         ok_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(XssScanResultActivity.this, XssActivity.class);
+                Intent i = new Intent(XssScanPositiveResult.this, XssActivity.class);
                 startActivity(i);
                 finish();
             }
