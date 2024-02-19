@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -24,8 +26,12 @@ import java.util.concurrent.ExecutionException;
 
 public class XssScanningActivity extends AppCompatActivity {
 
-    LottieAnimationView animationView;
+    LottieAnimationView animationView, load_ani;
     String result = "", URL_txt = "" ;
+
+    TextView status, info, info_2;
+
+    private Intent intent;
 
     public void getScanResults() {
         try {
@@ -49,8 +55,10 @@ public class XssScanningActivity extends AppCompatActivity {
             }
         } catch (IOException e) {
             //Toast.makeText(XssScanningActivity.this, "Unable to connect to Server, Check your Internet Connection", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(XssScanningActivity.this, XSSServerError.class);
-            startActivity(i);
+            if (intent == null){
+            intent = new Intent(XssScanningActivity.this, XSSServerError.class);
+            startActivity(intent);
+            }
             //e.printStackTrace();
         }
     }
@@ -70,8 +78,7 @@ public class XssScanningActivity extends AppCompatActivity {
                     //Toast.makeText(XssScanningActivity.this, "Unable to connect to Server", Toast.LENGTH_LONG).show();
                 }
             }
-        }.execute().get();
-
+        }.execute();
     }
 
     @Override
@@ -79,8 +86,14 @@ public class XssScanningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_xss_scanning);
+        status = findViewById(R.id.status_info_sc);
+        status.setVisibility(View.GONE);
+        info = findViewById(R.id.info_txt_sc);
+        info.setVisibility(View.GONE);
         animationView = findViewById(R.id.progressbar);
-
+        animationView.setVisibility(View.GONE);
+        load_ani = findViewById(R.id.loadani7);
+        info_2 = findViewById(R.id.status_info_sc2);
 
         Bundle rs = getIntent().getExtras();
         URL_txt = rs.getString("URL");
@@ -97,38 +110,49 @@ public class XssScanningActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        final Handler handler1 = new Handler();
+        /*final Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             @Override
             public void run() {
                 animationView.pauseAnimation();
             }
-        }, 1000);
+        }, 1000);*/
 
         final Handler handler3 = new Handler();
         handler3.postDelayed(new Runnable() {
             @Override
             public void run() {
-                animationView.resumeAnimation();
+                if (result.equals("")){
+                    if (intent == null){
+                        intent = new Intent(XssScanningActivity.this, XSSServerError.class);
+                        startActivity(intent);
+                    }
+                } else {
+                    load_ani.setVisibility(View.GONE);
+                    info_2.setVisibility(View.GONE);
+                    animationView.setVisibility(View.VISIBLE);
+                    status.setVisibility(View.VISIBLE);
+                    info.setVisibility(View.VISIBLE);
+                    final Handler handler2 = new Handler();
+                    handler2.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (result.equals("true")){
+                                Intent i = new Intent(XssScanningActivity.this, XssScanNegativeResult.class);
+                                startActivity(i);
+                                finish();
+                            }
+                            if (result.equals("false")){
+                                Intent i = new Intent(XssScanningActivity.this, XssScanPositiveResult.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
+                    }, 3250);
+                }
             }
-        }, 2000);
+        }, 5000);
 
-        final Handler handler2 = new Handler();
-        handler2.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (result.equals("true")){
-                    Intent i = new Intent(XssScanningActivity.this, XssScanNegativeResult.class);
-                    startActivity(i);
-                    finish();
-                }
-                if (result.equals("false")){
-                    Intent i = new Intent(XssScanningActivity.this, XssScanPositiveResult.class);
-                    startActivity(i);
-                    finish();
-                }
-            }
-        }, 4000);
     }
 
     private boolean haveNetworkConnection() {

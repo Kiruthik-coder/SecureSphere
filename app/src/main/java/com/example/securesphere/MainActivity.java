@@ -6,6 +6,7 @@ package com.example.securesphere;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -21,12 +22,22 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
             public void run() {
-                Intent iHome = new Intent(MainActivity.this, Welcome_Activity.class);
-                startActivity(iHome);
-                finish();
+                SharedPreferences settings = getApplicationContext().getSharedPreferences("UserData", 0);
+                String mail = settings.getString("email", "");
+
+                if(mail.equals("")) {
+                    Intent i;
+                    i = new Intent(MainActivity.this, Welcome_Activity.class);
+                    startActivity(i);
+                }else {
+                    Intent i;
+                    i = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(i);
+                }
+
             }
         }, 2500);
     }

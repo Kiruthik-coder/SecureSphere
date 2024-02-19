@@ -49,8 +49,7 @@ public class NoInternetActivity extends AppCompatActivity {
                             retry.setVisibility(View.VISIBLE);
                             load_ani.setVisibility(View.GONE);
                         }else {
-                            Intent i = new Intent(NoInternetActivity.this, XssActivity.class);
-                            startActivity(i);
+                            finish();
                         }
 
                     }

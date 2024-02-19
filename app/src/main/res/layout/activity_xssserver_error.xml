@@ -33,9 +33,8 @@
         android:layout_marginRight="45dp"
         android:layout_marginBottom="20dp"
         android:elevation="2dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Unable to contact our servers!, please try after some time.
-"
+        android:fontFamily="@font/poppins_light"
+        android:text="Oops !, We are unable to contact our servers."
         android:textAlignment="center"
         android:textColor="#040404"
         android:textSize="18sp"

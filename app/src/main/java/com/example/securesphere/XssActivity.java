@@ -18,7 +18,6 @@ import com.airbnb.lottie.LottieAnimationView;
 public class XssActivity extends AppCompatActivity {
 
     ImageButton exit_bt;
-
     Button scan_bt;
     TextView history_txt, URL_txt;
     LottieAnimationView animationView;
@@ -58,7 +57,6 @@ public class XssActivity extends AppCompatActivity {
                     if (!Connection){
                         Intent i = new Intent(XssActivity.this, NoInternetActivity.class);
                         startActivity(i);
-                        finish();
                     } else {
                         Intent i = new Intent(XssActivity.this, XssScanningActivity.class);
                         i.putExtra("URL", temp);
