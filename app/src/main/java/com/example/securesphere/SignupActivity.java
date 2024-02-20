@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class SignupActivity extends AppCompatActivity {
 
     EditText name, number, email, password;
@@ -70,6 +72,7 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
+                                        Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).sendEmailVerification();
                                         userInfo = new UserInfo();
                                         String UID = mAuth.getUid();
                                         String ref = "userDetails/" + UID;
@@ -105,11 +108,10 @@ public class SignupActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("UNAME" ,userInfo.getUserName().toString());
                     editor.putString("UNum" ,userInfo.getUserNumber().toString());
-                    editor.putString("email" ,userInfo.getUserEmail().toString());
                     editor.apply();
 
                     //Toast.makeText(SignupActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SignupActivity.this, HomeActivity.class);
+                    Intent i = new Intent(SignupActivity.this, EmailVerficationActivity.class);
                     startActivity(i);
                 } catch (Exception e) {
                     //Toast.makeText(SignupActivity.this, "This email is already used !", Toast.LENGTH_SHORT).show();
