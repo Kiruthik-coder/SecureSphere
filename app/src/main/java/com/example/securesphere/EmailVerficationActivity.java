@@ -45,8 +45,9 @@ public class EmailVerficationActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = settings.edit();
                             editor.putString("email" , user.getEmail());
                             editor.apply();
-                            Intent i = new Intent(EmailVerficationActivity.this, HomeActivity.class);
+                            Intent i = new Intent(EmailVerficationActivity.this, UserAccountCreationActivity.class);
                             startActivity(i);
+                            finish();
                         }else{
                             load_ani.setVisibility(View.GONE);
                             mail_verify.setVisibility(View.VISIBLE);

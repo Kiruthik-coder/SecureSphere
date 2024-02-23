@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     Button signup_bt;
     UserInfo userInfo;
     LottieAnimationView load_ani;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,15 @@ public class SignupActivity extends AppCompatActivity {
                 if (mail.equals("") || pass.equals("") || username.equals("") || usernumber.equals("")) {
                     load_ani.setVisibility(View.GONE);
                     signup_bt.setVisibility(View.VISIBLE);
-                    Toast.makeText(SignupActivity.this, "Please fill all values", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                } else if (!mail.matches(emailPattern)) {
+                    load_ani.setVisibility(View.GONE);
+                    signup_bt.setVisibility(View.VISIBLE);
+                    Toast.makeText(SignupActivity.this, "Not a valid mail address", Toast.LENGTH_SHORT).show();
+                } else if (pass.length() < 6) {
+                    load_ani.setVisibility(View.GONE);
+                    signup_bt.setVisibility(View.VISIBLE);
+                    Toast.makeText(SignupActivity.this, "Password should be min 6 characters", Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.createUserWithEmailAndPassword(mail, pass)
                             .addOnCompleteListener(SignupActivity.this,new OnCompleteListener<AuthResult>() {
@@ -113,6 +124,7 @@ public class SignupActivity extends AppCompatActivity {
                     //Toast.makeText(SignupActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, EmailVerficationActivity.class);
                     startActivity(i);
+                    finish();
                 } catch (Exception e) {
                     //Toast.makeText(SignupActivity.this, "This email is already used !", Toast.LENGTH_SHORT).show();
                 }

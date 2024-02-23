@@ -30,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
                 if(mail.equals("")) {
                     Intent i;
-                    i = new Intent(MainActivity.this, Welcome_Activity.class);
+                    i = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(i);
+                    finish();
                 }else {
                     Intent i;
                     i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
             }

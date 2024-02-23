@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     TextView forgot_password, sign_up;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     LottieAnimationView load_ani;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,19 +108,27 @@ public class LoginActivity extends AppCompatActivity {
                     load_ani.setVisibility(View.GONE);
                     login_button.setVisibility(View.VISIBLE);
                     //Toast.makeText(Login_Activity.this, "Please fill all values", Toast.LENGTH_SHORT).show();
+                } else if (!mail.matches(emailPattern)) {
+                    load_ani.setVisibility(View.GONE);
+                    login_button.setVisibility(View.VISIBLE);
+                    Toast.makeText(LoginActivity.this, "Not a valid mail address", Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.signInWithEmailAndPassword(mail, pass)
                             .addOnCompleteListener(
                                     new OnCompleteListener<AuthResult>() {
                                         @Override
-                                        public void onComplete(
-                                                @NonNull Task<AuthResult> task)
-                                        {
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(getApplicationContext(),
-                                                                "Login successful!!",
-                                                                Toast.LENGTH_LONG)
-                                                        .show();
+                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                boolean verify = user.isEmailVerified();
+
+                                                if (!verify) {
+                                                    Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).sendEmailVerification();
+                                                    Intent i = new Intent(LoginActivity.this, EmailVerficationActivity.class);
+                                                    startActivity(i);
+                                                } else {
+
+                                                Toast.makeText(getApplicationContext(), "Login successful!!", Toast.LENGTH_LONG).show();
 
                                                 String Userid = mAuth.getUid();
                                                 String ref = "userDetails/" + Userid;
@@ -130,11 +141,12 @@ public class LoginActivity extends AppCompatActivity {
                                                         UserInfo userInfo = snapshot.getValue(UserInfo.class);
                                                         SharedPreferences settings = getApplicationContext().getSharedPreferences("UserData", 0);
                                                         SharedPreferences.Editor editor = settings.edit();
-                                                        editor.putString("UNAME" ,userInfo.getUserName().toString());
-                                                        editor.putString("UNum" ,userInfo.getUserNumber().toString());
-                                                        editor.putString("email" ,userInfo.getUserEmail());
+                                                        editor.putString("UNAME", userInfo.getUserName().toString());
+                                                        editor.putString("UNum", userInfo.getUserNumber().toString());
+                                                        editor.putString("email", userInfo.getUserEmail());
                                                         editor.apply();
                                                     }
+
                                                     @Override
                                                     public void onCancelled(@NonNull DatabaseError error) {
                                                     }
@@ -144,21 +156,23 @@ public class LoginActivity extends AppCompatActivity {
                                                         = new Intent(LoginActivity.this,
                                                         HomeActivity.class);
                                                 startActivity(intent);
+                                                finish();
+                                                }
                                             }
                                             else {
                                                 load_ani.setVisibility(View.GONE);
                                                 login_button.setVisibility(View.VISIBLE);
                                                 Toast.makeText(getApplicationContext(),
-                                                                "Login failed!!",
+                                                                "Invalid Password or mail !",
                                                                 Toast.LENGTH_LONG)
                                                         .show();
                                                 //progressbar.setVisibility(View.GONE);
                                             }
                                         }
                                     });
+                    }
                 }
-            }
-        });
+            });
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override

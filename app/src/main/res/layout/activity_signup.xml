@@ -14,10 +14,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.7"
-
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_password_edt"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:layout_constraintVertical_bias="0.259"
         app:layout_constraintWidth_percent="0.7"
         app:lottie_autoPlay="true"
@@ -39,26 +38,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_password_edt"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:layout_constraintVertical_bias="0.261" />
 
-    <EditText
-        android:id="@+id/signup_password_edt"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:backgroundTint="#989898"
-        android:ems="10"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="start|top"
-        android:hint="Password (min six characters)"
-        android:inputType="textMultiLine"
+        android:backgroundTint="#6C6C6C"
+        android:textColorHint="#6C6C6C"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#050505"
+        app:passwordToggleDrawable="@drawable/password_eye_icon"
+        app:hintTextColor="#7E7E7E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_edit_text2"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.0"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#7E7E7E"
+        app:passwordToggleTintMode="multiply">
+
+        <EditText
+            android:id="@+id/signup_password_edt"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:backgroundTint="#989898"
+            android:ems="10"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="start|top"
+            android:hint="Password (min six characters)"
+            android:inputType="textPassword"
+            android:textColorHighlight="#9A9A9A"
+            android:textColorHint="#989898"
+            android:textColorLink="#989898"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_edit_text2"
+            app:layout_constraintVertical_bias="0.1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/number_edit_txt"
@@ -76,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_edit_text"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <EditText
         android:id="@+id/email_edit_text2"
@@ -89,12 +113,12 @@
         android:fontFamily="@font/poppins_light"
         android:gravity="start|top"
         android:hint="Email"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_edit_txt"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <EditText
         android:id="@+id/name_edit_text"
@@ -107,7 +131,7 @@
         android:fontFamily="@font/poppins_light"
         android:gravity="start|top"
         android:hint="Name"
-        android:inputType="textMultiLine"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
