@@ -68,7 +68,12 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Welcome_Activity"
             android:exported="false" />

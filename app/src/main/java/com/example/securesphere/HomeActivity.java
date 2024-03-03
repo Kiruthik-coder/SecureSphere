@@ -25,6 +25,11 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getIntent().getAction() != null && getIntent().getAction().equals("OPEN_ACTIVITY")) {
+            Intent intent = new Intent(HomeActivity.this, BiometricAuthenticatorActivity.class);
+            startActivity(intent);
+        }
+
         menu_bt = findViewById(R.id.menu_bt);
         menu_bt.setOnClickListener(new View.OnClickListener() {
             @Override
