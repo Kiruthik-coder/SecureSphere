@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -28,6 +29,8 @@ public class HomeFragment extends Fragment {
      LottieAnimationView animationView;
 
      ImageButton xss_bt, web_bt, activity_bt, menu_bt;
+
+     Button qr_button;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -74,6 +77,7 @@ public class HomeFragment extends Fragment {
         animationView = root.findViewById(R.id.feedClearAni);
         web_bt = root.findViewById(R.id.web_bt);
         activity_bt = root.findViewById(R.id.activity_bt);
+        qr_button = root.findViewById(R.id.scan_qr_bt);
         //menu_bt = root.findViewById(R.id.menu_bt);
 
         final Handler handler = new Handler();
@@ -116,6 +120,14 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });*/
+
+        qr_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), BiometricAuthenticatorActivity.class);
+                startActivity(i);
+            }
+        });
 
         return root;
     }

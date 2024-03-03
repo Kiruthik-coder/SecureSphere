@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
 
@@ -88,9 +90,20 @@ public class SignupActivity extends AppCompatActivity {
                                         String UID = mAuth.getUid();
                                         String ref = "userDetails/" + UID;
 
-                                        databaseReference = firebaseDatabase.getReference(ref);
-                                        addDatatoFirebase(username, usernumber, mail);
-
+                                        FirebaseMessaging.getInstance().getToken()
+                                                .addOnCompleteListener(new OnCompleteListener<String>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<String> task) {
+                                                        if (task.isSuccessful() && task.getResult() != null) {
+                                                            String token = task.getResult();
+                                                            databaseReference = firebaseDatabase.getReference(ref);
+                                                            addDatatoFirebase(username, usernumber, mail, token);
+                                                            //Toast.makeText(SignupActivity.this, "FCM token: " + token, Toast.LENGTH_LONG).show();
+                                                        } else {
+                                                            Toast.makeText(SignupActivity.this, "Failed to get FCM token", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                });
                                         Toast.makeText(SignupActivity.this, "Registration Completed", Toast.LENGTH_SHORT).show();
                                     }else {
                                         load_ani.setVisibility(View.GONE);
@@ -103,11 +116,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-    private void addDatatoFirebase(String name, String number, String email) {
+    private void addDatatoFirebase(String name, String number, String email, String fmc) {
 
         userInfo.setUserName(name);
         userInfo.setUserNumber(number);
         userInfo.setUserEmail(email);
+        userInfo.setFmcID(fmc);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

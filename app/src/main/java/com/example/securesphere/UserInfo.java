@@ -4,6 +4,8 @@ public class UserInfo {
     private String userName;
     private String userEmail;
     private String userNumber;
+
+    private String fmcID;
     public UserInfo() {
 
     }
@@ -32,4 +34,11 @@ public class UserInfo {
         return userNumber;
     }
 
+    public void setFmcID(String fmcID) {
+        this.fmcID = fmcID;
+    }
+
+    public String getFmcID(){
+        return fmcID;
+    }
 }
